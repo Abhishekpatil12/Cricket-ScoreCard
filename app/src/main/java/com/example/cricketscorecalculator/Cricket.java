@@ -1,11 +1,13 @@
 package com.example.cricketscorecalculator;
 
-public class Cricket {
+import java.io.Serializable;
+
+public class Cricket implements Serializable {
 
     int run;
     int ball;
     double runrate;
-    double over;
+    String over;
 
     public int getRun() {
         return run;
@@ -31,15 +33,15 @@ public class Cricket {
         this.runrate = runrate;
     }
 
-    public double getOver() {
+    public String getOver() {
         return over;
     }
 
-    public void setOver(double over) {
+    public void setOver(String over) {
         this.over = over;
     }
 
-    public Cricket(int run, int ball, double runrate, double over) {
+    public Cricket(int run, int ball, double runrate, String over) {
         this.run = run;
         this.ball = ball;
         this.runrate = runrate;

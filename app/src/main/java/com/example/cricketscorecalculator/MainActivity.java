@@ -2,6 +2,7 @@ package com.example.cricketscorecalculator;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -11,13 +12,14 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button zero,one,two,three,four,six,wide,noball,wicket;
+    Button zero,one,two,three,four,six,wide,noball,wicket,table;
     TextView run,outtxt,overtxt,runratetxt,ball1,ball2,ball3,ball4,ball5,ball6;
     int score=0;
     int out=0;
     double ov = 0.0;
     int ball=0;
     double perover=0;
+    String over="";
     ArrayList<Cricket> arr = new ArrayList<>();
 
     @Override
@@ -34,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         wide = findViewById(R.id.wide);
         noball = findViewById(R.id.no);
         wicket = findViewById(R.id.out);
+        table = findViewById(R.id.button2);
 
         run = findViewById(R.id.run);
         outtxt = findViewById(R.id.wicket);
@@ -48,6 +51,14 @@ public class MainActivity extends AppCompatActivity {
         ball6 = findViewById(R.id.ball6);
 
 
+        table.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this,MainActivity2.class);
+                intent.putExtra("score",arr);
+                startActivity(intent);
+            }
+        });
 
         zero.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -148,7 +159,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void save() {
-        Cricket c = new Cricket(score,ball,perover,ov);
+        Cricket c = new Cricket(score,ball,perover,over);
         arr.add(c);
 
         for(int i=0;i<arr.size();i++)
@@ -167,7 +178,8 @@ public class MainActivity extends AppCompatActivity {
         ball++;
         int no1 = ball/6;
         int no2 = ball%6;
-        overtxt.setText(no1+""+"."+no2+"");
+        over = no1+""+"."+no2+"";
+        overtxt.setText(over);
     }
 
     private void runratecount()

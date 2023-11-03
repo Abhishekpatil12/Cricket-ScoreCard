@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:stretchColumns="1,2,3"
+    android:layout_margin="8dp">
+
+    <TableRow>
+        <TextView
+            android:id="@+id/runstb"
+            android:text="Runs"
+            android:textSize="16dp"
+            android:padding="10dp"
+            android:gravity="center"
+            android:layout_column="1"/>
+
+        <TextView
+            android:id="@+id/overtb"
+            android:text="Over"
+            android:textSize="16dp"
+            android:padding="10dp"
+            android:gravity="center"
+            android:layout_column="1"/>
+
+        <TextView
+            android:id="@+id/runRatetb"
+            android:text="Runrate"
+            android:textSize="16dp"
+            android:padding="10dp"
+            android:gravity="center"
+            android:layout_column="1"/>
+
+
+    </TableRow>
+
+
+</TableLayout>

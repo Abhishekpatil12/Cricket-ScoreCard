@@ -370,7 +370,7 @@
         android:background="@drawable/border"
         android:fontFamily="@font/titan_one"
         android:padding="10dp"
-        android:text="Undo"
+        android:text="undo"
         android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
