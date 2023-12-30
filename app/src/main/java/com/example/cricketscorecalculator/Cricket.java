@@ -4,33 +4,34 @@ import java.io.Serializable;
 
 public class Cricket implements Serializable {
 
-    int run;
-    int ball;
-    double runrate;
+    int score;
+    int out;
     String over;
+    String action;
+    double perover;
 
-    public int getRun() {
-        return run;
+    public Cricket(int score, int out, String over, String action, double perover) {
+        this.score = score;
+        this.out = out;
+        this.over = over;
+        this.action = action;
+        this.perover = perover;
     }
 
-    public void setRun(int run) {
-        this.run = run;
+    public int getScore() {
+        return score;
     }
 
-    public int getBall() {
-        return ball;
+    public void setScore(int score) {
+        this.score = score;
     }
 
-    public void setBall(int ball) {
-        this.ball = ball;
+    public int getOut() {
+        return out;
     }
 
-    public double getRunrate() {
-        return runrate;
-    }
-
-    public void setRunrate(double runrate) {
-        this.runrate = runrate;
+    public void setOut(int out) {
+        this.out = out;
     }
 
     public String getOver() {
@@ -41,10 +42,19 @@ public class Cricket implements Serializable {
         this.over = over;
     }
 
-    public Cricket(int run, int ball, double runrate, String over) {
-        this.run = run;
-        this.ball = ball;
-        this.runrate = runrate;
-        this.over = over;
+    public String getAction() {
+        return action;
+    }
+
+    public void setAction(String action) {
+        this.action = action;
+    }
+
+    public double getPerover() {
+        return perover;
+    }
+
+    public void setPerover(double perover) {
+        this.perover = perover;
     }
 }

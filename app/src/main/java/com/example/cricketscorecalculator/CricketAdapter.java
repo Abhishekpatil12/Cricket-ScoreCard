@@ -32,9 +32,9 @@ public class CricketAdapter extends RecyclerView.Adapter<CricketAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Cricket data = datalist.get(position);
-        holder.textViewrun.setText(data.getRun()+"");
+        holder.textViewscore.setText(data.getScore()+"-"+data.getOut());
         holder.textViewover.setText(data.getOver());
-        holder.textViewrunrate.setText(data.getRunrate()+"");
+        holder.textViewaction.setText(data.getAction());
     }
 
     @Override
@@ -43,15 +43,15 @@ public class CricketAdapter extends RecyclerView.Adapter<CricketAdapter.ViewHold
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView textViewrun;
+        public TextView textViewscore;
         public TextView textViewover;
-        public TextView textViewrunrate;
+        public TextView textViewaction;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            textViewrun = itemView.findViewById(R.id.runstb);
+            textViewscore = itemView.findViewById(R.id.runstb);
             textViewover = itemView.findViewById(R.id.overtb);
-            textViewrunrate = itemView.findViewById(R.id.runRatetb);
+            textViewaction = itemView.findViewById(R.id.runRatetb);
         }
     }
 

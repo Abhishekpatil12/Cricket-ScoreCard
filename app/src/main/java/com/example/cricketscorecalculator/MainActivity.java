@@ -7,20 +7,26 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Stack;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button zero,one,two,three,four,six,wide,noball,wicket,table;
+    Button zero,one,two,three,four,six,wide,noball,wicket,table,undo,redo;
     TextView run,outtxt,overtxt,runratetxt,ball1,ball2,ball3,ball4,ball5,ball6;
     int score=0;
     int out=0;
     double ov = 0.0;
     int ball=0;
     double perover=0;
+    String action="";
     String over="";
-    ArrayList<Cricket> arr = new ArrayList<>();
+
+    Stack<Cricket> undost = new Stack<Cricket>();
+    Stack<Cricket> redost = new Stack<Cricket>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
         noball = findViewById(R.id.no);
         wicket = findViewById(R.id.out);
         table = findViewById(R.id.button2);
+        undo = findViewById(R.id.undo);
+        redo = findViewById(R.id.redo);
 
         run = findViewById(R.id.run);
         outtxt = findViewById(R.id.wicket);
@@ -50,12 +58,15 @@ public class MainActivity extends AppCompatActivity {
         ball5 = findViewById(R.id.ball5);
         ball6 = findViewById(R.id.ball6);
 
+        Cricket cd = new Cricket(0,0,"0.0","dot",0.0);
+        undost.push(cd);
+
 
         table.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this,MainActivity2.class);
-                intent.putExtra("score",arr);
+                intent.putExtra("score",undost);
                 startActivity(intent);
             }
         });
@@ -67,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
                 overcount();
                 showball(0);
                 runratecount();
+                action="Dot ball";
                 save();
 
             }
@@ -79,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
                 scorecount(1);
                 showball(1);
                 runratecount();
+                action="Single";
                 save();
             }
         });
@@ -90,6 +103,7 @@ public class MainActivity extends AppCompatActivity {
                 scorecount(2);
                 showball(2);
                 runratecount();
+                action="Double";
                 save();
             }
         });
@@ -101,6 +115,7 @@ public class MainActivity extends AppCompatActivity {
                 scorecount(3);
                 showball(3);
                 runratecount();
+                action="Three's";
                 save();
             }
         });
@@ -112,6 +127,7 @@ public class MainActivity extends AppCompatActivity {
                 scorecount(4);
                 showball(4);
                 runratecount();
+                action="four";
                 save();
             }
         });
@@ -123,6 +139,7 @@ public class MainActivity extends AppCompatActivity {
                 scorecount(6);
                 showball(6);
                 runratecount();
+                action="six";
                 save();
             }
         });
@@ -133,6 +150,7 @@ public class MainActivity extends AppCompatActivity {
 
                 scorecount(1);
                 runratecount();
+                action="Wide";
                 save();
             }
         });
@@ -141,6 +159,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 score = score + 1;
+                action="No ball";
                 run.setText(score+"");
             }
         });
@@ -151,21 +170,81 @@ public class MainActivity extends AppCompatActivity {
                 out = out + 1;
                 overcount();
                 runratecount();
+                action="Wicket";
                 save();
                 outtxt.setText(out+"");
+            }
+        });
+
+        undo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                System.out.println(undost.isEmpty());
+                if(undost.isEmpty())
+                {
+                    Toast.makeText(getApplicationContext(),"Nothing to undo",Toast.LENGTH_LONG);
+                }
+                else {
+
+
+                    Cricket c = undost.peek();
+
+                    undost.pop();
+                    redost.push(c);
+
+                    Cricket c1 = undost.peek();
+
+                    System.out.println(c1.getScore());
+
+
+                    run.setText(c1.getScore() + "");
+                    outtxt.setText(c1.getOut() + "");
+                    overtxt.setText(c1.getOver() + "");
+                    runratetxt.setText(c1.getPerover() + "");
+                }
+
+            }
+        });
+
+        redo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(redost.isEmpty())
+                {
+                    Toast.makeText(MainActivity.this,"Nothing to redo",Toast.LENGTH_LONG);
+                }
+                else
+                {
+
+
+                    Cricket c = redost.peek();
+
+                    redost.pop();
+                    undost.push(c);
+
+                    Cricket c1 = undost.peek();
+                    System.out.println(c1.getScore());
+
+                    run.setText(c1.getScore() + "");
+                    outtxt.setText(c1.getOut() + "");
+                    overtxt.setText(c1.getOver() + "");
+                    runratetxt.setText(c1.getPerover() + "");
+
+                }
+
             }
         });
 
     }
 
     private void save() {
-        Cricket c = new Cricket(score,ball,perover,over);
-        arr.add(c);
+        Cricket c = new Cricket(score,out,over,action,perover);
 
-        for(int i=0;i<arr.size();i++)
-        {
-            System.out.println("runs : "+arr.get(i).getRun());
-        }
+        undost.push(c);
+
+
     }
 
     private void scorecount(int i) {
