@@ -16,7 +16,7 @@ import java.util.Stack;
 public class MainActivity extends AppCompatActivity {
 
     Button zero,one,two,three,four,six,wide,noball,wicket,table,undo,redo,othrow;
-    TextView run,outtxt,overtxt,runratetxt,ball1,ball2,ball3,ball4,ball5,ball6;
+    TextView run,outtxt,overtxt,runratetxt;
     int score=0;
     int out=0;
     double ov = 0.0;
@@ -55,12 +55,6 @@ public class MainActivity extends AppCompatActivity {
         overtxt = findViewById(R.id.overs);
         runratetxt = findViewById(R.id.runRate);
 
-        ball1 = findViewById(R.id.ball1);
-        ball2 = findViewById(R.id.ball2);
-        ball3 = findViewById(R.id.ball3);
-        ball4 = findViewById(R.id.ball4);
-        ball5 = findViewById(R.id.ball5);
-        ball6 = findViewById(R.id.ball6);
 
         Cricket cd = new Cricket(0,0,"0.0","dot",0.0);
         undost.push(cd);
@@ -80,7 +74,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 overcount();
-                showball(0);
                 runratecount();
                 action="Dot ball";
                 save();
@@ -93,7 +86,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 overcount();
                 scorecount(1);
-                showball(1);
                 runratecount();
                 action="Single";
                 save();
@@ -105,7 +97,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 overcount();
                 scorecount(2);
-                showball(2);
                 runratecount();
                 action="Double";
                 save();
@@ -117,7 +108,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 overcount();
                 scorecount(3);
-                showball(3);
                 runratecount();
                 action="Three's";
                 save();
@@ -129,7 +119,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 overcount();
                 scorecount(4);
-                showball(4);
                 runratecount();
                 action="four";
                 save();
@@ -141,7 +130,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 overcount();
                 scorecount(6);
-                showball(6);
                 runratecount();
                 action="six";
                 save();
@@ -280,41 +268,6 @@ public class MainActivity extends AppCompatActivity {
         //System.out.println(perover);
         //System.out.println(score+" "+ball);
         runratetxt.setText("RR : "+perover+"");
-    }
-
-    private void showball(int i)
-    {
-        int no = ball%6;
-
-        if(no==1)
-        {
-            ball1.setText(i+"");
-            ball2.setText("*");
-            ball3.setText("*");
-            ball4.setText("*");
-            ball5.setText("*");
-            ball6.setText("*");
-        }
-        else if(no==2)
-        {
-            ball2.setText(i+"");
-        }
-        else if(no==3)
-        {
-            ball3.setText(i+"");
-        }
-        else if(no==4)
-        {
-            ball4.setText(i+"");
-        }
-        else if(no==5)
-        {
-            ball5.setText(i+"");
-        }
-        else if(no==0)
-        {
-            ball6.setText(i+"");
-        }
     }
 
     private void showOverThrowDialog(int myLayout) {
