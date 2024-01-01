@@ -151,82 +151,25 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/ball1"
-                    android:layout_width="20dp"
+                    android:id="@+id/target"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="2dp"
                     android:layout_weight="1"
-                    android:background="@drawable/round_circle"
-                    android:text="*"
-                    android:textAlignment="center"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
+                    android:fontFamily="@font/patua_one"
+                    android:text="Target"
+                    android:textColor="@android:color/white"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/ball2"
-                    android:layout_width="20dp"
+                    android:id="@+id/targetScore"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="2dp"
                     android:layout_weight="1"
-                    android:background="@drawable/round_circle"
-                    android:text="*"
-                    android:textAlignment="center"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/ball3"
-                    android:layout_width="20dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="2dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/round_circle"
-                    android:text="*"
-                    android:textAlignment="center"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/ball4"
-                    android:layout_width="20dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="2dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/round_circle"
-                    android:text="*"
-                    android:textAlignment="center"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/ball5"
-                    android:layout_width="20dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="2dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/round_circle"
-                    android:text="*"
-                    android:textAlignment="center"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/ball6"
-                    android:layout_width="20dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="2dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/round_circle"
-                    android:text="*"
-                    android:textAlignment="center"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:fontFamily="@font/patua_one"
+                    android:text="00"
+                    android:textColor="@android:color/white"
+                    android:textSize="20sp" />
             </LinearLayout>
 
         </LinearLayout>
