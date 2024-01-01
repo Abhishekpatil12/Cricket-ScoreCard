@@ -2,8 +2,6 @@ package com.example.cricketscorecalculator;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
-import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -11,13 +9,14 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Stack;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button zero,one,two,three,four,six,wide,noball,wicket,table,undo,redo,othrow;
-    TextView run,outtxt,overtxt,runratetxt,ball1,ball2,ball3,ball4,ball5,ball6;
-    int score=0;
+    Button zero,one,two,three,four,six,wide,noball,wicket,table,undo,redo,finish;
+    TextView run,outtxt,overtxt,runratetxt;
+    int score=0,score2=0,target=Integer.MAX_VALUE;
     int out=0;
     double ov = 0.0;
     int ball=0;
@@ -25,12 +24,10 @@ public class MainActivity extends AppCompatActivity {
     String action="";
     String over="";
 
-    Dialog dialog;
     Stack<Cricket> undost = new Stack<Cricket>();
     Stack<Cricket> redost = new Stack<Cricket>();
 
 
-    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,22 +42,15 @@ public class MainActivity extends AppCompatActivity {
         wide = findViewById(R.id.wide);
         noball = findViewById(R.id.no);
         wicket = findViewById(R.id.out);
-        othrow = findViewById(R.id.othrow);
         table = findViewById(R.id.button2);
         undo = findViewById(R.id.undo);
         redo = findViewById(R.id.redo);
+        finish = findViewById(R.id.button);
 
         run = findViewById(R.id.run);
         outtxt = findViewById(R.id.wicket);
         overtxt = findViewById(R.id.overs);
         runratetxt = findViewById(R.id.runRate);
-
-        ball1 = findViewById(R.id.ball1);
-        ball2 = findViewById(R.id.ball2);
-        ball3 = findViewById(R.id.ball3);
-        ball4 = findViewById(R.id.ball4);
-        ball5 = findViewById(R.id.ball5);
-        ball6 = findViewById(R.id.ball6);
 
         Cricket cd = new Cricket(0,0,"0.0","dot",0.0);
         undost.push(cd);
@@ -80,10 +70,10 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 overcount();
-                showball(0);
                 runratecount();
                 action="Dot ball";
                 save();
+                check();
 
             }
         });
@@ -93,10 +83,10 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 overcount();
                 scorecount(1);
-                showball(1);
                 runratecount();
                 action="Single";
                 save();
+                check();
             }
         });
 
@@ -105,10 +95,10 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 overcount();
                 scorecount(2);
-                showball(2);
                 runratecount();
                 action="Double";
                 save();
+                check();
             }
         });
 
@@ -117,10 +107,10 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 overcount();
                 scorecount(3);
-                showball(3);
                 runratecount();
                 action="Three's";
                 save();
+                check();
             }
         });
 
@@ -129,10 +119,10 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 overcount();
                 scorecount(4);
-                showball(4);
                 runratecount();
                 action="four";
                 save();
+                check();
             }
         });
 
@@ -141,10 +131,10 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 overcount();
                 scorecount(6);
-                showball(6);
                 runratecount();
                 action="six";
                 save();
+                check();
             }
         });
 
@@ -156,6 +146,7 @@ public class MainActivity extends AppCompatActivity {
                 runratecount();
                 action="Wide";
                 save();
+                check();
             }
         });
 
@@ -165,7 +156,6 @@ public class MainActivity extends AppCompatActivity {
                 score = score + 1;
                 action="No ball";
                 run.setText(score+"");
-                showNoBallDialog(R.layout.no_ball);
             }
         });
 
@@ -177,14 +167,8 @@ public class MainActivity extends AppCompatActivity {
                 runratecount();
                 action="Wicket";
                 save();
+                check();
                 outtxt.setText(out+"");
-            }
-        });
-
-        othrow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showOverThrowDialog(R.layout.overthrow);
             }
         });
 
@@ -249,6 +233,25 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        finish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                target = score;
+                score=0;
+                out=0;
+                ov = 0.0;
+                ball=0;
+                perover=0;
+                action="";
+                over="";
+                run.setText("0");
+                outtxt.setText("0");
+                overtxt.setText("0.0");
+                runratetxt.setText("0.0");
+
+            }
+        });
+
     }
 
     private void save() {
@@ -258,6 +261,16 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+    private void check()
+    {
+        if(score>target)
+        {
+            Toast.makeText(MainActivity.this,"Team 2 won",Toast.LENGTH_LONG);
+            System.out.println("Team 2 won");
+        }
+    }
+
 
     private void scorecount(int i) {
         score = score + i;
@@ -282,203 +295,7 @@ public class MainActivity extends AppCompatActivity {
         runratetxt.setText("RR : "+perover+"");
     }
 
-    private void showball(int i)
-    {
-        int no = ball%6;
 
-        if(no==1)
-        {
-            ball1.setText(i+"");
-            ball2.setText("*");
-            ball3.setText("*");
-            ball4.setText("*");
-            ball5.setText("*");
-            ball6.setText("*");
-        }
-        else if(no==2)
-        {
-            ball2.setText(i+"");
-        }
-        else if(no==3)
-        {
-            ball3.setText(i+"");
-        }
-        else if(no==4)
-        {
-            ball4.setText(i+"");
-        }
-        else if(no==5)
-        {
-            ball5.setText(i+"");
-        }
-        else if(no==0)
-        {
-            ball6.setText(i+"");
-        }
-    }
 
-    private void showOverThrowDialog(int myLayout) {
-
-        dialog = new Dialog(MainActivity.this);
-        dialog.setContentView(myLayout);
-        dialog.setCancelable(false);
-
-        Button one = dialog.findViewById(R.id.one_0);
-        Button two = dialog.findViewById(R.id.two_0);
-        Button three = dialog.findViewById(R.id.three_0);
-        Button four = dialog.findViewById(R.id.four_0);
-        Button five = dialog.findViewById(R.id.five_0);
-        Button six = dialog.findViewById(R.id.six_0);
-        Button cancel = dialog.findViewById(R.id.cancel_0);
-
-        dialog.show();
-
-        one.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // write your code here
-                dialog.dismiss();
-            }
-        });
-
-        two.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // write your code here
-                dialog.dismiss();
-            }
-        });
-
-        three.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // write your code here
-                dialog.dismiss();
-            }
-        });
-
-        four.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // write your code here
-                dialog.dismiss();
-            }
-        });
-
-        five.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // write your code here
-                dialog.dismiss();
-            }
-        });
-
-        six.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // write your code here
-                dialog.dismiss();
-            }
-        });
-
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // write your code here
-                dialog.dismiss();
-            }
-        });
-    }
-
-    private void showNoBallDialog(int myLayout) {
-
-        dialog = new Dialog(MainActivity.this);
-        dialog.setContentView(myLayout);
-        dialog.setCancelable(false);
-
-        Button dot = dialog.findViewById(R.id.dot_1);
-        Button one = dialog.findViewById(R.id.one_1);
-        Button two = dialog.findViewById(R.id.two_1);
-        Button three = dialog.findViewById(R.id.three_1);
-        Button four = dialog.findViewById(R.id.four_1);
-        Button five = dialog.findViewById(R.id.five_1);
-        Button six = dialog.findViewById(R.id.six_1);
-        Button out = dialog.findViewById(R.id.out_1);
-        Button cancel = dialog.findViewById(R.id.cancel_1);
-
-        dialog.show();
-
-        dot.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // write your code here
-                dialog.dismiss();
-            }
-        });
-
-        one.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // write your code here
-                dialog.dismiss();
-            }
-        });
-
-        two.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // write your code here
-                dialog.dismiss();
-            }
-        });
-
-        three.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // write your code here
-                dialog.dismiss();
-            }
-        });
-
-        four.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // write your code here
-                dialog.dismiss();
-            }
-        });
-
-        five.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // write your code here
-                dialog.dismiss();
-            }
-        });
-
-        six.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // write your code here
-                dialog.dismiss();
-            }
-        });
-
-        out.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // write your code here
-                dialog.dismiss();
-            }
-        });
-
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // write your code here
-                dialog.dismiss();
-            }
-        });
-    }
 
 }
