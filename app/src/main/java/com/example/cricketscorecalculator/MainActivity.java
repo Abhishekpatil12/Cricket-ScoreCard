@@ -2,6 +2,8 @@ package com.example.cricketscorecalculator;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,12 +11,11 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.Stack;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button zero,one,two,three,four,six,wide,noball,wicket,table,undo,redo;
+    Button zero,one,two,three,four,six,wide,noball,wicket,table,undo,redo,othrow;
     TextView run,outtxt,overtxt,runratetxt,ball1,ball2,ball3,ball4,ball5,ball6;
     int score=0;
     int out=0;
@@ -24,10 +25,12 @@ public class MainActivity extends AppCompatActivity {
     String action="";
     String over="";
 
+    Dialog dialog;
     Stack<Cricket> undost = new Stack<Cricket>();
     Stack<Cricket> redost = new Stack<Cricket>();
 
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
         wide = findViewById(R.id.wide);
         noball = findViewById(R.id.no);
         wicket = findViewById(R.id.out);
+        othrow = findViewById(R.id.othrow);
         table = findViewById(R.id.button2);
         undo = findViewById(R.id.undo);
         redo = findViewById(R.id.redo);
@@ -161,6 +165,7 @@ public class MainActivity extends AppCompatActivity {
                 score = score + 1;
                 action="No ball";
                 run.setText(score+"");
+                showNoBallDialog(R.layout.no_ball);
             }
         });
 
@@ -173,6 +178,13 @@ public class MainActivity extends AppCompatActivity {
                 action="Wicket";
                 save();
                 outtxt.setText(out+"");
+            }
+        });
+
+        othrow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showOverThrowDialog(R.layout.overthrow);
             }
         });
 
@@ -305,6 +317,168 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private void showOverThrowDialog(int myLayout) {
 
+        dialog = new Dialog(MainActivity.this);
+        dialog.setContentView(myLayout);
+        dialog.setCancelable(false);
+
+        Button one = dialog.findViewById(R.id.one_0);
+        Button two = dialog.findViewById(R.id.two_0);
+        Button three = dialog.findViewById(R.id.three_0);
+        Button four = dialog.findViewById(R.id.four_0);
+        Button five = dialog.findViewById(R.id.five_0);
+        Button six = dialog.findViewById(R.id.six_0);
+        Button cancel = dialog.findViewById(R.id.cancel_0);
+
+        dialog.show();
+
+        one.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // write your code here
+                dialog.dismiss();
+            }
+        });
+
+        two.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // write your code here
+                dialog.dismiss();
+            }
+        });
+
+        three.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // write your code here
+                dialog.dismiss();
+            }
+        });
+
+        four.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // write your code here
+                dialog.dismiss();
+            }
+        });
+
+        five.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // write your code here
+                dialog.dismiss();
+            }
+        });
+
+        six.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // write your code here
+                dialog.dismiss();
+            }
+        });
+
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // write your code here
+                dialog.dismiss();
+            }
+        });
+    }
+
+    private void showNoBallDialog(int myLayout) {
+
+        dialog = new Dialog(MainActivity.this);
+        dialog.setContentView(myLayout);
+        dialog.setCancelable(false);
+
+        Button dot = dialog.findViewById(R.id.dot_1);
+        Button one = dialog.findViewById(R.id.one_1);
+        Button two = dialog.findViewById(R.id.two_1);
+        Button three = dialog.findViewById(R.id.three_1);
+        Button four = dialog.findViewById(R.id.four_1);
+        Button five = dialog.findViewById(R.id.five_1);
+        Button six = dialog.findViewById(R.id.six_1);
+        Button out = dialog.findViewById(R.id.out_1);
+        Button cancel = dialog.findViewById(R.id.cancel_1);
+
+        dialog.show();
+
+        dot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // write your code here
+                dialog.dismiss();
+            }
+        });
+
+        one.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // write your code here
+                dialog.dismiss();
+            }
+        });
+
+        two.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // write your code here
+                dialog.dismiss();
+            }
+        });
+
+        three.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // write your code here
+                dialog.dismiss();
+            }
+        });
+
+        four.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // write your code here
+                dialog.dismiss();
+            }
+        });
+
+        five.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // write your code here
+                dialog.dismiss();
+            }
+        });
+
+        six.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // write your code here
+                dialog.dismiss();
+            }
+        });
+
+        out.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // write your code here
+                dialog.dismiss();
+            }
+        });
+
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // write your code here
+                dialog.dismiss();
+            }
+        });
+    }
 
 }

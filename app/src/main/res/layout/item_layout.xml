@@ -2,33 +2,43 @@
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:stretchColumns="1,2,3"
-    android:layout_margin="8dp">
+    android:layout_margin="8dp"
+    android:stretchColumns="1,2,3">
 
-    <TableRow>
+    <TableRow android:textAlignment="center">
+
         <TextView
             android:id="@+id/runstb"
-            android:text="Runs"
-            android:textSize="16dp"
-            android:padding="10dp"
+            android:layout_column="1"
+            android:fontFamily="@font/patua_one"
             android:gravity="center"
-            android:layout_column="1"/>
+            android:padding="10dp"
+            android:text="Runs"
+            android:textAlignment="center"
+            android:textColor="@android:color/white"
+            android:textSize="16dp" />
 
         <TextView
             android:id="@+id/overtb"
-            android:text="Over"
-            android:textSize="16dp"
-            android:padding="10dp"
+            android:layout_column="1"
+            android:fontFamily="@font/patua_one"
             android:gravity="center"
-            android:layout_column="1"/>
+            android:padding="10dp"
+            android:text="Over"
+            android:textAlignment="center"
+            android:textColor="@android:color/white"
+            android:textSize="16dp" />
 
         <TextView
             android:id="@+id/runRatetb"
-            android:text="Runrate"
-            android:textSize="16dp"
-            android:padding="10dp"
+            android:layout_column="1"
+            android:fontFamily="@font/patua_one"
             android:gravity="center"
-            android:layout_column="1"/>
+            android:padding="10dp"
+            android:text="Runrate"
+            android:textAlignment="center"
+            android:textColor="@android:color/white"
+            android:textSize="16dp" />
 
 
     </TableRow>

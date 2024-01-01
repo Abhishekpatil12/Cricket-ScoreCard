@@ -4,34 +4,42 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:stretchColumns="1,2,3"
     android:layout_margin="8dp"
+    android:background="@drawable/gradient_background2"
+    android:stretchColumns="1,2,3"
     tools:context=".MainActivity2">
 
-    <TableRow>
+    <TableRow android:background="@drawable/gradient_background2">
+
         <TextView
+            android:layout_column="1"
+            android:fontFamily="@font/patua_one"
+            android:gravity="center"
+            android:padding="10dp"
             android:text="Score"
+            android:textColor="@android:color/white"
             android:textSize="16dp"
-            android:textStyle="bold"
-            android:padding="10dp"
-            android:gravity="center"
-            android:layout_column="1"/>
+            android:textStyle="bold" />
 
         <TextView
+            android:layout_column="1"
+            android:fontFamily="@font/patua_one"
+            android:gravity="center"
+            android:padding="10dp"
             android:text="Over"
+            android:textColor="@android:color/white"
             android:textSize="16dp"
-            android:textStyle="bold"
-            android:padding="10dp"
-            android:gravity="center"
-            android:layout_column="1"/>
+            android:textStyle="bold" />
 
         <TextView
-            android:text="Action"
-            android:textSize="16dp"
-            android:textStyle="bold"
-            android:padding="10dp"
+            android:layout_column="1"
+            android:fontFamily="@font/patua_one"
             android:gravity="center"
-            android:layout_column="1"/>
+            android:padding="10dp"
+            android:text="Action"
+            android:textColor="@android:color/white"
+            android:textSize="16dp"
+            android:textStyle="bold" />
 
 
     </TableRow>
@@ -40,7 +48,7 @@
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scrollbars="vertical"/>
+        android:scrollbars="vertical" />
 
 
 </TableLayout>
