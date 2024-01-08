@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -59,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
         targettxt = findViewById(R.id.target);
         targetscoretxt = findViewById(R.id.targetScore);
 
+        takeOversInput(R.layout.overs_input);
 
         Cricket cd = new Cricket(0,0,"0.0","dot",0.0);
         undost.push(cd);
@@ -201,23 +203,23 @@ public class MainActivity extends AppCompatActivity {
         finish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                targettxt.setVisibility(TextView.VISIBLE);
-                targetscoretxt.setVisibility(TextView.VISIBLE);
-                target = score;
-                target++;
-                targetscoretxt.setText(target+"");
-                score=0;
-                out=0;
-                ov = 0.0;
-                ball=0;
-                perover=0;
-                action="";
-                over="";
-                run.setText("0");
-                outtxt.setText("0");
-                overtxt.setText("0.0");
-                runratetxt.setText("RR : 0");
+                showAlert(R.layout.alert);
+//                targettxt.setVisibility(TextView.VISIBLE);
+//                targetscoretxt.setVisibility(TextView.VISIBLE);
+//                target = score;
+//                target++;
+//                targetscoretxt.setText(target+"");
+//                score=0;
+//                out=0;
+//                ov = 0.0;
+//                ball=0;
+//                perover=0;
+//                action="";
+//                over="";
+//                run.setText("0");
+//                outtxt.setText("0");
+//                overtxt.setText("0.0");
+//                runratetxt.setText("RR : 0");
 
             }
         });
@@ -546,6 +548,92 @@ public class MainActivity extends AppCompatActivity {
         });
 
         cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // write your code here
+                dialog.dismiss();
+            }
+        });
+    }
+
+    private void takeOversInput(int layout){
+        dialog = new Dialog(MainActivity.this);
+        dialog.setContentView(layout);
+        dialog.setCancelable(false);
+
+        Button start = dialog.findViewById(R.id.start);
+        EditText overs_input = dialog.findViewById(R.id.numberInput);
+
+        dialog.show();
+
+        start.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(overs_input.getText().toString().equals("")){
+                    Toast.makeText(MainActivity.this, "Enter the Overs", Toast.LENGTH_SHORT).show();
+                }else{
+                    // write your code here
+                    over = overs_input.getText().toString();
+                    dialog.dismiss();
+                }
+            }
+        });
+    }
+
+    private void showAlert(int myLayout){
+        dialog = new Dialog(MainActivity.this);
+        dialog.setContentView(R.layout.alert);
+        dialog.setCancelable(false);
+
+        Button yes = dialog.findViewById(R.id.ok);
+        Button no = dialog.findViewById(R.id.no);
+
+        dialog.show();
+
+        yes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                targettxt.setVisibility(TextView.VISIBLE);
+                targetscoretxt.setVisibility(TextView.VISIBLE);
+                target = score;
+                target++;
+                targetscoretxt.setText(target+"");
+                score=0;
+                out=0;
+                ov = 0.0;
+                ball=0;
+                perover=0;
+                action="";
+                over="";
+                run.setText("0");
+                outtxt.setText("0");
+                overtxt.setText("0.0");
+                runratetxt.setText("RR : 0");
+                dialog.dismiss();
+            }
+        });
+
+        no.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+    }
+
+    private void showWinner(int layout, String str){
+        dialog = new Dialog(MainActivity.this);
+        dialog.setContentView(R.layout.alert);
+        dialog.setCancelable(false);
+
+        Button new_game = dialog.findViewById(R.id.new_game);
+        TextView winner_team = dialog.findViewById(R.id.team_name);
+
+        winner_team.setText(str);
+
+        dialog.show();
+
+        new_game.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // write your code here

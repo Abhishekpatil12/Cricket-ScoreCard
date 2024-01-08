@@ -290,7 +290,7 @@
             android:layout_margin="8dp"
             android:background="@drawable/border"
             android:fontFamily="@font/patua_one"
-            android:text="      Wicket\n"
+            android:text="Wicket\n "
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="19.9sp"
@@ -342,7 +342,7 @@
             android:layout_margin="8dp"
             android:background="@drawable/border"
             android:fontFamily="@font/patua_one"
-            android:text="Run Out"
+            android:text="Run-\nOut"
             android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold" />
