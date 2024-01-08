@@ -637,6 +637,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // write your code here
+//                hello
                 dialog.dismiss();
             }
         });
