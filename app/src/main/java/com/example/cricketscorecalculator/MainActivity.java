@@ -625,7 +625,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void showAlert(int myLayout){
         dialog = new Dialog(MainActivity.this);
-        dialog.setContentView(R.layout.alert);
+        dialog.setContentView(myLayout);
         dialog.setCancelable(false);
 
         Button yes = dialog.findViewById(R.id.ok);
@@ -664,9 +664,9 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void showWinner(int layout, String str){
+    private void showWinner(int mylayout, String str){
         dialog = new Dialog(MainActivity.this);
-        dialog.setContentView(R.layout.alert);
+        dialog.setContentView(mylayout);
         dialog.setCancelable(false);
 
         Button new_game = dialog.findViewById(R.id.new_game);
