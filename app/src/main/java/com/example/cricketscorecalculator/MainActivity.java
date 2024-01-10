@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     int ball=0;
     double perover=0;
     String action="";
-    String over="";
+    String over="",over1;
 
     Dialog dialog;
     Stack<Cricket> undost = new Stack<Cricket>();
@@ -61,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
         targetscoretxt = findViewById(R.id.targetScore);
 
         takeOversInput(R.layout.overs_input);
+
 
         Cricket cd = new Cricket(0,0,"0.0","dot",0.0);
         undost.push(cd);
@@ -300,9 +301,43 @@ public class MainActivity extends AppCompatActivity {
 
         if(score>target)
         {
+            showWinner(R.layout.winner,"Team 2");
             Toast.makeText(MainActivity.this,"Team 2 won",Toast.LENGTH_LONG);
             System.out.println("Team 2 won");
         }
+
+        double num1 = Double.parseDouble(over1);
+        double num2 = Double.parseDouble(over);
+
+        System.out.println(num1+" "+num2);
+
+        if(num1==num2 && target!=Integer.MAX_VALUE && score<target)
+        {
+            //here i have called
+            showWinner(R.layout.winner,"Team 1");
+        }
+
+        if(num1==num2)
+        {
+            targettxt.setVisibility(TextView.VISIBLE);
+            targetscoretxt.setVisibility(TextView.VISIBLE);
+            target = score;
+            target++;
+            targetscoretxt.setText(target+"");
+            score=0;
+            out=0;
+            ov = 0.0;
+            ball=0;
+            perover=0;
+            action="";
+            over="";
+            run.setText("0");
+            outtxt.setText("0");
+            overtxt.setText("0.0");
+            runratetxt.setText("RR : 0");
+        }
+
+
 
     }
 
@@ -327,16 +362,23 @@ public class MainActivity extends AppCompatActivity {
         int no1 = ball/6;
         int no2 = ball%6;
         over = no1+""+"."+no2+"";
-        overtxt.setText(over);
+        overtxt.setText(over+"  ("+over1+")");
     }
 
     private void runratecount()
     {
-        perover = (score*6)/ball;
-        //double perover = perball*6;
-        //System.out.println(perover);
-        //System.out.println(score+" "+ball);
-        runratetxt.setText("RR : "+perover+"");
+        try {
+            perover = (score*6)/ball;
+            //double perover = perball*6;
+            //System.out.println(perover);
+            //System.out.println(score+" "+ball);
+            runratetxt.setText("RR : "+perover+"");
+        }
+        catch (Exception e)
+        {
+
+        }
+
     }
 
     private void showOverThrowDialog(int myLayout,String str) {
@@ -573,7 +615,8 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "Enter the Overs", Toast.LENGTH_SHORT).show();
                 }else{
                     // write your code here
-                    over = overs_input.getText().toString();
+                    over1 = overs_input.getText().toString();
+                    overtxt.setText(ov+"  ("+over1+")");
                     dialog.dismiss();
                 }
             }
