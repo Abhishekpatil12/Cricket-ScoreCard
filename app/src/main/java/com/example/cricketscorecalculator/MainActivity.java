@@ -207,22 +207,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 showAlert(R.layout.alert);
-//                targettxt.setVisibility(TextView.VISIBLE);
-//                targetscoretxt.setVisibility(TextView.VISIBLE);
-//                target = score;
-//                target++;
-//                targetscoretxt.setText(target+"");
-//                score=0;
-//                out=0;
-//                ov = 0.0;
-//                ball=0;
-//                perover=0;
-//                action="";
-//                over="";
-//                run.setText("0");
-//                outtxt.setText("0");
-//                overtxt.setText("0.0");
-//                runratetxt.setText("RR : 0");
+
 
             }
         });
@@ -230,6 +215,18 @@ public class MainActivity extends AppCompatActivity {
         finish_inning.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                if(score>target)
+                {
+                    showWinner(R.layout.winner,"Team 2");
+                    Toast.makeText(MainActivity.this,"Team 2 won",Toast.LENGTH_LONG);
+                    System.out.println("Team 2 won");
+                }
+                else if(target!=Integer.MAX_VALUE && score<target)
+                {
+                    showWinner(R.layout.winner,"Team 1");
+                    Toast.makeText(MainActivity.this,"Team 2 won",Toast.LENGTH_LONG);
+                }
 
                 targettxt.setVisibility(TextView.VISIBLE);
                 targetscoretxt.setVisibility(TextView.VISIBLE);
@@ -332,6 +329,7 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(MainActivity.this,"Team 2 won",Toast.LENGTH_LONG);
             System.out.println("Team 2 won");
         }
+
 
         double num1 = Double.parseDouble(over1);
         double num2 = Double.parseDouble(over);
