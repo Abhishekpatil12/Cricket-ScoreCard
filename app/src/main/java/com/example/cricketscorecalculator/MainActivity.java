@@ -16,8 +16,8 @@ import java.util.Stack;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button zero,one,two,three,four,six,wide,noball,wicket,table,undo,redo,othrow,runout,finish;
-    TextView run,outtxt,overtxt,runratetxt,targettxt,targetscoretxt;
+    Button zero,one,two,three,four,six,wide,noball,wicket,table,undo,redo,othrow,runout,finish,finish_inning;
+    TextView run,outtxt,overtxt,runratetxt,targettxt,targetscoretxt,teamtxt;
     int score=0,target=Integer.MAX_VALUE;
     int out=0;
     double ov = 0.0;
@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
         undo = findViewById(R.id.undo);
         redo = findViewById(R.id.redo);
         finish = findViewById(R.id.button);
+        finish_inning = findViewById(R.id.finish_inning);
 
         run = findViewById(R.id.run);
         outtxt = findViewById(R.id.wicket);
@@ -59,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
         runratetxt = findViewById(R.id.runRate);
         targettxt = findViewById(R.id.target);
         targetscoretxt = findViewById(R.id.targetScore);
+        teamtxt = findViewById(R.id.textView);
 
         takeOversInput(R.layout.overs_input);
 
@@ -225,6 +227,31 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        finish_inning.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                targettxt.setVisibility(TextView.VISIBLE);
+                targetscoretxt.setVisibility(TextView.VISIBLE);
+                teamtxt.setText("Team 2");
+                target = score;
+                target++;
+                targetscoretxt.setText(target+"");
+                score=0;
+                out=0;
+                ov = 0.0;
+                ball=0;
+                perover=0;
+                action="";
+                over="";
+                run.setText("0");
+                outtxt.setText("0");
+                overtxt.setText("0.0");
+                runratetxt.setText("RR : 0");
+
+            }
+        });
+
         othrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -321,6 +348,7 @@ public class MainActivity extends AppCompatActivity {
         {
             targettxt.setVisibility(TextView.VISIBLE);
             targetscoretxt.setVisibility(TextView.VISIBLE);
+            teamtxt.setText("Team 2");
             target = score;
             target++;
             targetscoretxt.setText(target+"");
@@ -636,22 +664,8 @@ public class MainActivity extends AppCompatActivity {
         yes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                targettxt.setVisibility(TextView.VISIBLE);
-                targetscoretxt.setVisibility(TextView.VISIBLE);
-                target = score;
-                target++;
-                targetscoretxt.setText(target+"");
-                score=0;
-                out=0;
-                ov = 0.0;
-                ball=0;
-                perover=0;
-                action="";
-                over="";
-                run.setText("0");
-                outtxt.setText("0");
-                overtxt.setText("0.0");
-                runratetxt.setText("RR : 0");
+                finish();
+                startActivity(getIntent());
                 dialog.dismiss();
             }
         });
@@ -681,6 +695,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // write your code here
 //                hello
+                finish();
+                startActivity(getIntent());
                 dialog.dismiss();
             }
         });
