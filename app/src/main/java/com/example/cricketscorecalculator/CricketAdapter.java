@@ -33,7 +33,7 @@ public class CricketAdapter extends RecyclerView.Adapter<CricketAdapter.ViewHold
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Cricket data = datalist.get(position);
         holder.textViewscore.setText(data.getScore()+"-"+data.getOut());
-        holder.textViewover.setText(data.getOver());
+        holder.textViewover.setText(data.getOver()+"");
         holder.textViewaction.setText(data.getAction());
     }
 

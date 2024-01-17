@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         takeOversInput(R.layout.overs_input);
 
 
-        Cricket cd = new Cricket(0,0,"0.0","dot",0.0);
+        Cricket cd = new Cricket(0,0,0,"0.0","dot",0.0);
         undost.push(cd);
 
 
@@ -86,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
                 runratecount();
                 action="Dot ball";
                 save();
+                check();
 
 
             }
@@ -99,6 +100,7 @@ public class MainActivity extends AppCompatActivity {
                 runratecount();
                 action="Single";
                 save();
+                check();
 
             }
         });
@@ -111,6 +113,7 @@ public class MainActivity extends AppCompatActivity {
                 runratecount();
                 action="Double";
                 save();
+                check();
 
             }
         });
@@ -123,6 +126,7 @@ public class MainActivity extends AppCompatActivity {
                 runratecount();
                 action="Three's";
                 save();
+                check();
 
             }
         });
@@ -135,6 +139,7 @@ public class MainActivity extends AppCompatActivity {
                 runratecount();
                 action="four";
                 save();
+                check();
 
             }
         });
@@ -147,6 +152,7 @@ public class MainActivity extends AppCompatActivity {
                 runratecount();
                 action="six";
                 save();
+                check();
 
             }
         });
@@ -160,6 +166,7 @@ public class MainActivity extends AppCompatActivity {
                 action="Wide";
                 save();
                 showNoBallDialog(R.layout.no_ball,"Wide ");
+                check();
 
             }
         });
@@ -171,6 +178,7 @@ public class MainActivity extends AppCompatActivity {
                 action="No ball";
                 run.setText(score+"");
                 showNoBallDialog(R.layout.no_ball,"No ball ");
+                check();
 
             }
         });
@@ -184,6 +192,7 @@ public class MainActivity extends AppCompatActivity {
                 action="Wicket";
                 save();
                 outtxt.setText(out+"");
+                check();
             }
         });
 
@@ -191,12 +200,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                out = out + 1;
-                overcount();
-                runratecount();
-                action="Wicket";
-                save();
-                outtxt.setText(out+"");
                 showOverThrowDialog(R.layout.overthrow,"Run Out ");
 
 
@@ -253,6 +256,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 showOverThrowDialog(R.layout.overthrow,"Overthrow");
+                check();
             }
         });
 
@@ -278,10 +282,19 @@ public class MainActivity extends AppCompatActivity {
                     System.out.println(c1.getScore());
 
 
-                    run.setText(c1.getScore() + "");
-                    outtxt.setText(c1.getOut() + "");
-                    overtxt.setText(c1.getOver() + "");
-                    runratetxt.setText("RR : "+c1.getPerover() + "");
+                    score= c1.getScore();
+                    out=c1.getOut();
+                    over = c1.getOver();
+                    ball=c1.getBall();
+                    perover=c1.getPerover();
+                    action=c1.getAction();
+
+
+
+                    run.setText(score + "");
+                    outtxt.setText(out + "");
+                    overtxt.setText(over+"  ("+over1+")");
+                    runratetxt.setText("RR : "+perover + "");
                 }
 
             }
@@ -307,11 +320,19 @@ public class MainActivity extends AppCompatActivity {
                     Cricket c1 = undost.peek();
                     System.out.println(c1.getScore());
 
-                    run.setText(c1.getScore() + "");
-                    outtxt.setText(c1.getOut() + "");
-                    overtxt.setText(c1.getOver() + "");
-                    runratetxt.setText(c1.getPerover() + "");
+                    score= c1.getScore();
+                    out=c1.getOut();
+                    over = c1.getOver();
+                    ball=c1.getBall();
+                    perover=c1.getPerover();
+                    action=c1.getAction();
 
+
+
+                    run.setText(score + "");
+                    outtxt.setText(out + "");
+                    overtxt.setText(over+"  ("+over1+")");
+                    runratetxt.setText("RR : "+perover + "");
                 }
 
             }
@@ -369,7 +390,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void save() {
-        Cricket c = new Cricket(score,out,over,action,perover);
+        Cricket c = new Cricket(score,ball,out,over,action,perover);
 
         undost.push(c);
 
@@ -379,7 +400,7 @@ public class MainActivity extends AppCompatActivity {
     private void scorecount(int i) {
         score = score + i;
         run.setText(score+"");
-        check();
+
     }
 
     private void overcount()
@@ -389,6 +410,7 @@ public class MainActivity extends AppCompatActivity {
         int no2 = ball%6;
         over = no1+""+"."+no2+"";
         overtxt.setText(over+"  ("+over1+")");
+
     }
 
     private void runratecount()
@@ -423,15 +445,26 @@ public class MainActivity extends AppCompatActivity {
 
         dialog.show();
 
+
+
+
         one.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // write your code here
+                if(str.equals("Run Out "))
+                {
+                    out = out + 1;
+                    overcount();
+                    outtxt.setText(out+"");
+
+                }
                 scorecount(1);
                 runratecount();
                 action=str+" single";
                 save();
                 dialog.dismiss();
+                check();
             }
         });
 
@@ -439,11 +472,19 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // write your code here
+                if(str.equals("Run Out "))
+                {
+                    out = out + 1;
+                    overcount();
+                    outtxt.setText(out+"");
+
+                }
                 scorecount(2);
                 runratecount();
                 action=str+" double";
                 save();
                 dialog.dismiss();
+                check();
             }
         });
 
@@ -451,11 +492,19 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // write your code here
+                if(str.equals("Run Out "))
+                {
+                    out = out + 1;
+                    overcount();
+                    outtxt.setText(out+"");
+
+                }
                 scorecount(3);
                 runratecount();
                 action=str+" three";
                 save();
                 dialog.dismiss();
+                check();
             }
         });
 
@@ -463,11 +512,19 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // write your code here
+                if(str.equals("Run Out "))
+                {
+                    out = out + 1;
+                    overcount();
+                    outtxt.setText(out+"");
+
+                }
                 scorecount(4);
                 runratecount();
                 action=str+" four";
                 save();
                 dialog.dismiss();
+                check();
             }
         });
 
@@ -475,11 +532,19 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // write your code here
+                if(str.equals("Run Out "))
+                {
+                    out = out + 1;
+                    overcount();
+                    outtxt.setText(out+"");
+
+                }
                 scorecount(5);
                 runratecount();
                 action=str+" five";
                 save();
                 dialog.dismiss();
+                check();
             }
         });
 
@@ -487,11 +552,19 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // write your code here
+                if(str.equals("Run Out "))
+                {
+                    out = out + 1;
+                    overcount();
+                    outtxt.setText(out+"");
+
+                }
                 scorecount(6);
                 runratecount();
                 action=str+" six";
                 save();
                 dialog.dismiss();
+                check();
             }
         });
 
@@ -502,6 +575,8 @@ public class MainActivity extends AppCompatActivity {
                 dialog.dismiss();
             }
         });
+
+
     }
 
 
@@ -611,6 +686,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // write your code here
+                int out = Integer.parseInt(outtxt.getText().toString());
+                out = out+1;
+                action="Wicket";
+                save();
+                outtxt.setText(out+"");
+                check();
                 dialog.dismiss();
             }
         });
